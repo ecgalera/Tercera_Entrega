@@ -4,27 +4,25 @@ export default class TicketService{
     }
 
     getTicketService = () =>{
-        return this.dao.getTickets()
+        return this.dao.getTicket()
     }
 
     getTicketByIdService = (tid) =>{
         return this.dao.getTicketById(tid)
     }
 
-    getTicketByUserIdService = (udi) =>{
-        return this.dao.getTicketByUserId(uid)
-
+    createTicketService = (ticket) =>{
+        return this.dao.createTicket(ticket)
     }
 
-    addTicketService = (ticket) =>{
-        return this.dao.createTicket(ticket)
+    updateTicketService = (tid, ticket) =>{
+        return this.dao.updateTicket(tid, ticket)
     }
 
     deleteTicketService = (tid) =>{
         return this.dao.deleteTicket(tid)
     }
 
-    updateTicketService = (tid) =>{
-        return this.dao.updateTicket(tid)
-    }
 }
+
+

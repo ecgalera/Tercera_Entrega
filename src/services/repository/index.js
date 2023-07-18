@@ -2,7 +2,7 @@
 import PersistenceFactoryUsers from "../../dao/UsersFactory.js";
 import PersistenceFactoryProduct from "../../dao/ProductFactory.js";
 import PersistenceFactoryCart from "../../dao/CartFactory.js";
-import PersistenceFactoryTicket from "../../dao/ticketFactory.js"
+import PersistenceFactoryTicket from "../../dao/TicketFactory.js"
 
 import UserRepository from "../user.service.js";
 import ProductsRepositoy from "../product.service.js";

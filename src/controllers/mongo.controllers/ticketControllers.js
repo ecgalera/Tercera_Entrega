@@ -1,92 +1,62 @@
 import { ticketService } from "../../services/repository/index.js";
 
-//--------------------------------------------------------
 
-const getTicketsController = async (req, res) => {
+export const getTicketController = async (req,res) => {
     try {
-        const tickets = await ticketService.deleteTicketService()
+        const tickets = await ticketService.getTicketService()
         return res.sendSuccess(tickets)
     } catch (error) {
         return res.sendInternalError(error)
     }
 };
 
-//--------------------------------------------------------
-
-const getTicketByIdController = async (req, res) => {
-    const { tid } = req.params
+export const getTicketByIdController = async (req, res) => {
     try {
+        const {tid} = req.params
         const ticket = await ticketService.getTicketByIdService(tid)
-        res.sendSuccess(ticket)
-
-    } catch (error) {
-        res.sendInternalError(error)
-    }
-};
-
-//--------------------------------------------------------
-
-const getTicketByUserIdController = async (req, res) => {
-    const { uid } = req.params
-    try {
-        const ticket = await ticketService.getTicketByUserIdService(uid)
-        res.sendSuccess(ticket)
-
-    } catch (error) {
-        return res.sendInternalError(error)
-    }
-};
-
-//--------------------------------------------------------
-
-const createTicketController = async(req,res)=>{
-    try {
-        const {uid, cid} = req.params
-        const {ticketBody} = req.body
-        const preTicket = {
-            user: uid,
-            cart: cid,
-            ...ticketBody
-        }
-        console.log(uid, cid)
-        const ticket = await ticketService.createTicketController(preTicket)
         return res.sendSuccess(ticket)
     } catch (error) {
         return res.sendInternalError(error)
     }
 };
 
-//--------------------------------------------------------
 
-const deleteTicketController = async (req, res) =>{
+export const createTicketController = async (req, res) => {
+    try {
+        const {newTicket} = req.body
+        const ticket = await ticketService.createTicketService(newTicket)
+        return res.sendSuccess(ticket)
+    } catch (error) {
+        return res.sendInternalError(error)
+    }
+};
+
+export const updateTicketController = async (req, res) =>{
+    try { 
+        const {tid}=req.params
+        const {updateTicket} = req.body
+        const tiket = await ticketService.updateTicketService(tid, updateTicket)
+        return res.sendSuccess(ticket)
+    } catch (error) {
+        return res.sendInternalError(error)
+    }
+}
+
+
+
+export const deleteTicketControlller = async (req, res) =>{
     try {
         const {tid} = req.params
         const ticket = await ticketService.deleteTicketService(tid)
+        return res.sendSuccess(ticket)
     } catch (error) {
         return res.sendInternalError(error)
     }
 };
 
-//--------------------------------------------------------
-
-const udateTicketController = async(req, res) =>{
-    try {
-        const {tid} = req.params
-        const {ticketBody} = req.body
-        const ticket = await ticketService.updateTicketService(tid, ticketBody)
-        return res.sendSuccess(ticket)
-    } catch (error) {
-        return res.sendInternalError(error)
-    }
-}
 
 
-//--------------------------------------------------------
-export default {
-    getTicketsController,
-    getTicketByIdController,
-    getTicketByUserIdController,
-    createTicketController,
-    deleteTicketController,
-    udateTicketController
-}
+
+
+
+

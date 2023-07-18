@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import userModel from "../models/userModel.js"
 
-const collection = "Tickets";
+const collection = "Ticket";
 
-const schema = mongoose.Schema({
+const schema = new mongoose.Schema({
 
     user: {
         type: mongoose.SchemaTypes.ObjectId,
@@ -14,11 +15,6 @@ const schema = mongoose.Schema({
         unique: true
     },
 
-    cart: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Cart",
-    },
-
     amount: Number, // suma total de la compra
 
     purchaser: String, // correo del usuario asociado al carrito
@@ -28,38 +24,32 @@ const schema = mongoose.Schema({
         default: 0,
     }
 
-
 },
 
     { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 
-);
+)
 
-schema.pre("save", async function (next) {
-    if (this.isNew) {
 
-        const user = await this.model("Users").findById(this.user);
-
-        this.purchaser = user.email;
-
-        const count = await this.model("Tickets").countDocuments();
-        this.code = `${user.email}.${count + 1}/${this._id}`;
-        console.log(this.code);
-        this.count = count + 1;
-
-        next();
-
-        try {
-
-        } catch (error) {
-            next(error)
-        }
-
-    } else {
-        next()
-    }
-})
 
 const ticketModel = mongoose.model(collection, schema);
 
 export default ticketModel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
